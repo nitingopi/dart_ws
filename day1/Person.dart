@@ -5,6 +5,8 @@
 //% 4.static
 //! There are no public, protected or private keywords in dart
 
+import 'dart:convert';
+
 class Person{
 
   int id = 0;
@@ -29,10 +31,13 @@ class Person{
 
   Person.fromJSON(String str){
     print("Got $str");
+    print(jsonDecode(str));
+    
   }
 
   Person.fromXML(String str){
     print("Got $str");
+    
     print("$id $name");
   }
 
@@ -42,20 +47,20 @@ class Person{
 }
 String movie = "James Bond";
 void main(){
-  var p = Person(1, "Bill");
-  var p1 = Person(2, 23);
-  p.printPerson();
-  p1.printPerson();
-  print(movie);
+  // var p = Person(1, "Bill");
+  // var p1 = Person(2, "Mark");
+  // p.printPerson();
+  // p1.printPerson();
+  // print(movie);
 
-  var q = Person.fromJSON("{'id':1, 'name='Hari'}");
+  var q = Person.fromJSON("{\"id\":1, \"name\":\"Hari\"}");
   q.printPerson();
 
-  var r = Person.fromXML("<Person><id>2</id><name>Kairali</name></Person>");
-  r.printPerson();
+  // var r = Person.fromXML("<Person><id>2</id><name>Kairali</name></Person>");
+  // r.printPerson();
 
-  var s = Person.fromString("id=4, name=Manoj");
-  s.printPerson();
+  // var s = Person.fromString("id=4, name=Manoj");
+  // s.printPerson();
 
 }
 
