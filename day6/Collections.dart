@@ -19,5 +19,10 @@ void main() {
   result  = list.any((element) => element > 20);
   print("any element > 20 $result");
   print(list.contains(23));
+  var it = list.iterator;
+  print("*"*10);
+  while(it.moveNext()){
+    print(it.current);
+  }  
 
 }
