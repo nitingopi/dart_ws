@@ -1,10 +1,27 @@
 import 'dart:convert';
 
+class Transaction{
+  final DateTime date = DateTime.now();
+  final String description;
+  final double amount ;
+  final String type;
+
+  Transaction(this.description, this.amount, this.type);
+
+  @override
+  String toString() {
+    
+    String txn = "${this.date}: ${this.description} ${this.amount} ${this.type}";
+    // return super.toString();
+    return txn;
+  }
+}
 class Account{
   //! FIELDS
   late final int accountNumber; //! PUBLICLY AVAILABLE AS READ-ONLY "PROPERTY"
   late String holdersName; // PUBLICLY AVAILABLE AS READ-ONLY "PROPERTY"
   late double _balance;  //! Private to the package
+  var transactions = [];
 
 
   // STATIC 
@@ -23,21 +40,44 @@ class Account{
   }
 
   //! methods
-  double deposit(double amount) => _balance += amount;
-  double withdraw(double amount) => _balance -= amount;
+  double deposit(String description, double amount) {
+    var txn = Transaction(description, amount, "CR");
+    transactions.add(txn);
+    return _balance += amount;
+    
+    
+  } 
+  double withdraw(String description, double amount) {
+    var txn = Transaction(description, amount, "DR");
+    transactions.add(txn);
+    return _balance -= amount;
+
+  } 
   void display() => print("$accountNumber : [$holdersName] $_balance");
 
   
   //! GETTERS AND SETTERS
   double get balance => _balance; //# getter for private variables
+ 
+  void printTransactions() {
+    for (var txn in transactions) {
+      // print("${txn.date}: ${txn.description} ${txn.amount} ${txn.type}");
+      print(txn);
+    }
+  }
 
 }
 
 void main() {
   print(Account._nextAccountNumber);
   var a = Account("Lars Bak", 10000); 
-  a.deposit(100);
-  a.withdraw(200);
+  a.deposit("salary credited", 5000);
+  a.withdraw("loan amount", 4000);
+  a.printTransactions();
+  
+
+  print("----------------------------------");
+ 
   a.display();
   a.holdersName = "Mark Zuckerberg";
   a.display();
