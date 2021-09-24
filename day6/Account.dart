@@ -131,7 +131,7 @@ void main() {
   var b = CurrentAccount("Bill Gates", 100000);
   //! STEP 5
   // b.notifyMe(onChange);
-  b.notifyMe((double $oldBalance, double $newBalance, String $type) => print(
+  b.notifyMe((double oldBalance, double newBalance, String type) => print(
       "Old balance => $oldBalance New Balance => $newBalance Transaction type => $type"));
   b.deposit("salary credited", 5000);
   b.withdraw("loan amount", 4000);
